@@ -7,6 +7,7 @@ import useDeleteContract from '../data-access-contract-form/useDeleteContract'
 import useFormModal from '@ui/shared/modal/form-modal/useFormModal'
 import ContractPriceEditForm from '../feature-contract-form/ContractPriceEditForm'
 import ContractForm from '../feature-contract-form/ContractForm'
+import checkIsMeetingChanged from '@ui/shared/util-util/checkIsMeetingChanged'
 
 type ContractOptionKebabProps = {
   contract: ContractType
@@ -14,6 +15,7 @@ type ContractOptionKebabProps = {
 
 const ContractOptionKebab = ({ contract }: ContractOptionKebabProps) => {
   const { id, status, customer: { name, id: customerId }, car: { model, id: carId }, user: { id: userId }, contractPrice, meetings } = contract
+  const originMeetings = JSON.parse(JSON.stringify(meetings))
 
   const { openConfirmDeleteModal } = useConfirmDeleteModal()
   const { openFormModal, closeFormModal } = useFormModal()
@@ -33,7 +35,8 @@ const ContractOptionKebab = ({ contract }: ContractOptionKebabProps) => {
               form: <ContractForm
                 onSubmit={(data) => {
                   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  editContract({ id, data: { ...data, meetings: data.meetings.map(({ id, ...rest }) => rest) } })
+                  const isMeetingsChanged = checkIsMeetingChanged(originMeetings, data.meetings)
+                  editContract({ id, data: { ...data, meetings: data.meetings.map(({ id, ...rest }) => rest), isMeetingsChanged } })
                   closeFormModal()
                 }}
                 defaultValues={{ meetings, customerId, carId, userId }}

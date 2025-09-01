@@ -182,11 +182,13 @@ export type ContractType = {
     id: number,
     name: string,
   },
+  isMeetingChanged?: boolean,
   meetings: Meeting[],
   status: ContractStatus,
   contractPrice: number,
   resolutionDate: string | null,
   contractDocuments: DocumentType[],
+  isContractDocumentChanged?: boolean,
 }
 
 export type ContractsBoardGroupType = {
@@ -210,6 +212,7 @@ export type ContractFormInput = {
   carId: number,
   customerId: number,
   userId?: number,
+  isMeetingChanged?: boolean,
 }
 
 // contract document - data
@@ -232,9 +235,11 @@ export type ContractDocumentType = {
 export type ContractDocumentRegisterFormInput = {
   id: number,
   contractDocuments: DocumentType[],
+  isContractDocumentChanged?: boolean,
 }
 
 export type ContractDocumentEditFormInput = {
+  isContractDocumentChanged?: boolean,
   contractDocuments: DocumentType[],
 }
 

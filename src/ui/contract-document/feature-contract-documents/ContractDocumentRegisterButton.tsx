@@ -3,6 +3,7 @@ import useFormModal from '@ui/shared/modal/form-modal/useFormModal'
 import { ContractDocumentRegisterFormInput } from '@shared/types'
 import useRegisterContractDocuments from '../data-access-contract-document-form/useRegisterContractDocuments'
 import ContractDocumentRegisterForm from '../feature-contract-document-form/ContractDocumentRegisterForm'
+import checkIsContractDocumentChanged from '@ui/shared/util-util/checkIsContractDocumentChanged'
 
 type ContractDocumentRegisterButtonProps = {
 
@@ -13,6 +14,8 @@ const ContractDocumentRegisterButton = ({ }: ContractDocumentRegisterButtonProps
   const { mutate: registerContractDocuments } = useRegisterContractDocuments()
 
   const handleRegisterContractDocument = (data: ContractDocumentRegisterFormInput) => {
+    const isContractDocumentChanged = checkIsContractDocumentChanged([], data.contractDocuments)
+    data.isContractDocumentChanged = isContractDocumentChanged
     registerContractDocuments(data)
     closeFormModal()
   }

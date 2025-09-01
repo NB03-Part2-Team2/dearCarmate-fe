@@ -267,6 +267,8 @@ export type ContractEditFormInput = Partial<{
   customerId: number
   userId: number
   contractDocuments: DocumentType[]
+  isMeetingsChanged?: boolean
+  isContractDocumentChanged?: boolean
 }>
 
 export const editContract = async (id: number, data: ContractEditFormInput) => {

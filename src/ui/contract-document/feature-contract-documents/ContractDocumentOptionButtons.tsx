@@ -11,6 +11,7 @@ import ContractDocumentEditForm from '../feature-contract-document-form/Contract
 import useEditContractDocument from '../data-access-contract-document-form/useEditContractDocument'
 import ContractDocumentDownloadForm from '../feature-contract-document-form/ContractDocumentDownloadForm'
 import styles from './ContractDocumentOptionButtons.module.scss'
+import checkIsContractDocumentChanged from '@ui/shared/util-util/checkIsContractDocumentChanged'
 
 const cx = classNames.bind(styles)
 
@@ -25,8 +26,11 @@ const ContractDocumentOptionButtons = ({
   const { mutate: editContractDocument } = useEditContractDocument()
 
   const { id, documents } = contractDocument
+  const originDocuments = JSON.parse(JSON.stringify(documents))
 
   const handleEditContractDocument = (data: ContractDocumentEditFormInput) => {
+    const isContractDocumentChanged = checkIsContractDocumentChanged(originDocuments, data.contractDocuments)
+    data.isContractDocumentChanged = isContractDocumentChanged
     editContractDocument({ id, data })
     closeFormModal()
   }
