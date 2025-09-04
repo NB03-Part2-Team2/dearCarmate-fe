@@ -1,0 +1,28 @@
+.customerName {
+  font-weight: 600;
+  color: $neutral-900;
+}
+
+.contractCount {
+  font-weight: 500;
+  
+  &.high {
+    color: $success-700;
+    font-weight: 600;
+  }
+  
+  &.medium {
+    color: $warning-700;
+  }
+}
+
+.phoneNumber {
+  font-family: 'Pretendard', monospace;
+  font-size: 13px;
+}
+
+.region,
+.ageGroup {
+  color: $neutral-600;
+  font-size: 13px;
+}

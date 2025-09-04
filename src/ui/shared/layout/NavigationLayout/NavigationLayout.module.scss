@@ -4,7 +4,15 @@
 
   .contentWrapper {
     flex-grow: 1;
-    padding: 60px;
+    padding: $space-8;
     overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+    
+    > * {
+      width: 100%;
+      max-width: 1400px;
+    }
   }
 }

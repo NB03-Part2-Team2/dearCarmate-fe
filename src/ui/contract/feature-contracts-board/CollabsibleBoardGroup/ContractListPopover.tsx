@@ -16,7 +16,7 @@ type ContractListPopoverProps = {
   totalItemCount: number
 }
 
-const ContractListPopover = forwardRef<HTMLDialogElement, ContractListPopoverProps>(({ cards, status, totalItemCount }, ref) => {
+const ContractListPopover = forwardRef<HTMLDivElement, ContractListPopoverProps>(({ cards, status, totalItemCount }, ref) => {
   const [searchKeyword, setSearchKeyword] = useState('')
   const searchCards = cards.filter(card =>
     card.user.name.includes(searchKeyword) ||
@@ -24,7 +24,7 @@ const ContractListPopover = forwardRef<HTMLDialogElement, ContractListPopoverPro
     card.customer.name.includes(searchKeyword))
 
   return (
-    <dialog ref={ref} className={cx('popover')}>
+    <div ref={ref} className={cx('popover')}>
       <div className={cx('contentContainer')}>
         <div className={cx('title')}>{`${CONTRACT_STATUS_MAP[status]} (${totalItemCount})`}</div>
         <TextField
@@ -47,7 +47,7 @@ const ContractListPopover = forwardRef<HTMLDialogElement, ContractListPopoverPro
           </div>
         )}
       </div>
-    </dialog>
+    </div>
   )
 })
 

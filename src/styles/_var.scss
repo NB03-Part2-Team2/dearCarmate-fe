@@ -1,1 +1,51 @@
+// Layout variables
 $gnb-height: var(--gnb-height);
+
+// Spacing system
+$space-1: var(--space-1);   // 4px
+$space-2: var(--space-2);   // 8px
+$space-3: var(--space-3);   // 12px
+$space-4: var(--space-4);   // 16px
+$space-5: var(--space-5);   // 20px
+$space-6: var(--space-6);   // 24px
+$space-8: var(--space-8);   // 32px
+$space-10: var(--space-10); // 40px
+$space-12: var(--space-12); // 48px
+$space-16: var(--space-16); // 64px
+
+// Border radius system
+$radius-sm: var(--radius-sm);   // 6px
+$radius-md: var(--radius-md);   // 8px
+$radius-lg: var(--radius-lg);   // 12px
+$radius-xl: var(--radius-xl);   // 16px
+$radius-2xl: var(--radius-2xl); // 24px
+$radius-full: var(--radius-full); // Full rounded
+
+// Shadow system
+$shadow-xs: var(--shadow-xs);
+$shadow-sm: var(--shadow-sm);
+$shadow-md: var(--shadow-md);
+$shadow-lg: var(--shadow-lg);
+$shadow-xl: var(--shadow-xl);
+
+// Typography
+$font-size-xs: var(--font-size-xs);     // 12px
+$font-size-sm: var(--font-size-sm);     // 14px
+$font-size-base: var(--font-size-base); // 16px
+$font-size-lg: var(--font-size-lg);     // 18px
+$font-size-xl: var(--font-size-xl);     // 20px
+$font-size-2xl: var(--font-size-2xl);   // 24px
+$font-size-3xl: var(--font-size-3xl);   // 30px
+$font-size-4xl: var(--font-size-4xl);   // 36px
+
+// Line height
+$leading-none: var(--leading-none);
+$leading-tight: var(--leading-tight);
+$leading-snug: var(--leading-snug);
+$leading-normal: var(--leading-normal);
+$leading-relaxed: var(--leading-relaxed);
+$leading-loose: var(--leading-loose);
+
+// Transition
+$transition-colors: var(--transition-colors);
+$transition-all: var(--transition-all);

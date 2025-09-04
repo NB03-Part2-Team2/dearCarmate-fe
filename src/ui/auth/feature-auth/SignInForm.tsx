@@ -26,6 +26,11 @@ const SignInForm = ({ }: SignInFormProps) => {
 
   return (
     <FormProvider {...methods}>
+      <div className={cx('welcomeSection')}>
+        <h1 className={cx('title')}>환영합니다! 👋</h1>
+        <p className={cx('subtitle')}>디어카메이트로 스마트한 차량 관리를 시작하세요</p>
+      </div>
+
       <form className={cx('container')} onSubmit={methods.handleSubmit(handleSignIn)}>
         <div className={cx('inputs')}>
           <div>
@@ -54,8 +59,11 @@ const SignInForm = ({ }: SignInFormProps) => {
             />
           </div>
         </div>
-        <Button className={cx('button')} type='submit' size='large' theme='red' disabled={isPending}>로그인</Button>
+        <Button className={cx('button')} type='submit' size='large' theme='red' disabled={isPending}>
+          {isPending ? '로그인 중...' : '로그인'}
+        </Button>
       </form>
+
       <p className={cx('message')}>
         디어카메이트가 처음이신가요?
         <Link className={cx('signup')} href='/signup'>

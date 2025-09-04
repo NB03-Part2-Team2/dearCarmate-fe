@@ -5,6 +5,11 @@ import EmptyData from '@ui/shared/table/EmptyData'
 import { CUSTOMER_GENDER_MAP } from '@ui/shared/util-constants/constants'
 import CustomerOptionButtons from '../feature-customers/CustomerOptionButtons'
 import useCustomerDetailModal from '../util-customer-detail-modal/useCustomerDetailModal'
+import Badge from '@ui/shared/badge/Badge'
+import classNames from 'classnames/bind'
+import styles from './CustomersInfoTable.module.scss'
+
+const cx = classNames.bind(styles)
 
 type CustomersInfoTableProps = {
   data: CustomerType[]
@@ -23,6 +28,18 @@ const columns: Column<CustomerType>[] = [
 const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
   const { openCustomerDetailModal } = useCustomerDetailModal()
   const isEmpty = data.length === 0
+
+  const getContractBadgeVariant = (count: number) => {
+    if (count >= 5) return 'success'
+    if (count >= 2) return 'warning'
+    return 'secondary'
+  }
+
+  const getGenderBadgeVariant = (gender: string) => {
+    if (gender === '남성') return 'info'
+    if (gender === '여성') return 'primary'
+    return 'secondary'
+  }
 
   return (
     <TableContainer>
@@ -50,9 +67,29 @@ const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
                   openCustomerDetailModal({ data: record })
                 }}
               >
-                {columns.map((column) => (
-                  <TableCell key={column.key}>{processedRecord[column.key]}</TableCell>
-                ))}
+                <TableCell>
+                  <span className={cx('customerName')}>{processedRecord.name}</span>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={getContractBadgeVariant(processedRecord.contractCount)}>
+                    {processedRecord.contractCount}회
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={getGenderBadgeVariant(processedRecord.gender)}>
+                    {processedRecord.gender}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('phoneNumber')}>{processedRecord.phoneNumber}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('ageGroup')}>{processedRecord.ageGroup}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('region')}>{processedRecord.region}</span>
+                </TableCell>
+                <TableCell>{processedRecord.email}</TableCell>
                 <TableCell isLast>
                   <CustomerOptionButtons customer={record} />
                 </TableCell>

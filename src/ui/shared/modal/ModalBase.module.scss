@@ -5,6 +5,7 @@
   animation: fadeI 0.2s;
   background-color: rgb(0 0 0 / 70%);
   inset: 0;
+  backdrop-filter: blur(8px);
 
   &:has(.form) {
     z-index: 1000;
@@ -17,9 +18,14 @@
   .container {
     position: absolute;
     width: 510px;
-    padding: 40px 24px;
+    padding: $space-10 $space-6;
     animation: fadeIn 0.6s ease normal;
-    border-radius: 4px;
+    border-radius: $radius-xl;
     background-color: $white;
+    box-shadow: $shadow-xl;
+    border: 1px solid $neutral-200;
+    max-width: calc(100vw - $space-8);
+    max-height: calc(100vh - $space-8);
+    overflow-y: auto;
   }
 }

@@ -14,8 +14,12 @@ const ContractDocumentRegisterButton = ({ }: ContractDocumentRegisterButtonProps
   const { mutate: registerContractDocuments } = useRegisterContractDocuments()
 
   const handleRegisterContractDocument = (data: ContractDocumentRegisterFormInput) => {
+    console.log('계약서 등록 데이터:', data)
+    console.log('contractDocuments:', data.contractDocuments)
     const isContractDocumentChanged = checkIsContractDocumentChanged([], data.contractDocuments)
+    console.log('isContractDocumentChanged:', isContractDocumentChanged)
     data.isContractDocumentChanged = isContractDocumentChanged
+    console.log('최종 전송 데이터:', data)
     registerContractDocuments(data)
     closeFormModal()
   }

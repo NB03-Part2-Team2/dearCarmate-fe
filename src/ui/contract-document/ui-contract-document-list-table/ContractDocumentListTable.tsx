@@ -5,6 +5,11 @@ import EmptyData from '@ui/shared/table/EmptyData'
 import { format, parseISO } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import ContractDocumentOptionButtons from '../feature-contract-documents/ContractDocumentOptionButtons'
+import Badge from '@ui/shared/badge/Badge'
+import classNames from 'classnames/bind'
+import styles from './ContractDocumentListTable.module.scss'
+
+const cx = classNames.bind(styles)
 
 type ContractDocumentListTableProps = {
   data: ContractDocumentType[]
@@ -20,6 +25,12 @@ const columns: Column<Omit<ContractDocumentType, 'documents'>>[] = [
 
 const ContractDocumentListTable = ({ data }: ContractDocumentListTableProps) => {
   const isEmpty = data.length === 0
+
+  const getDocumentCountBadgeVariant = (count: number) => {
+    if (count >= 5) return 'success'
+    if (count >= 2) return 'warning'
+    return 'secondary'
+  }
 
   return (
     <TableContainer>
@@ -37,14 +48,30 @@ const ContractDocumentListTable = ({ data }: ContractDocumentListTableProps) => 
             const processedRecord = {
               ...record,
               resolutionDate: record.resolutionDate ? format(parseISO(record.resolutionDate), 'yyyy년 MM월 dd일', { locale: ko }) : '-',
+              // manager 필드를 userName으로 매핑
+              userName: record.userName || '-',
             }
             return (
               <TableRow
                 key={record.id}
               >
-                {columns.map((column) => (
-                  <TableCell key={column.key}>{processedRecord[column.key]}</TableCell>
-                ))}
+                <TableCell>
+                  <span className={cx('contractName')}>{processedRecord.contractName}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('resolutionDate')}>{processedRecord.resolutionDate}</span>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={getDocumentCountBadgeVariant(processedRecord.documentCount)}>
+                    {processedRecord.documentCount}개
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('userName')}>{processedRecord.userName}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('carNumber')}>{processedRecord.carNumber}</span>
+                </TableCell>
                 <TableCell isLast>
                   <ContractDocumentOptionButtons contractDocument={record} />
                 </TableCell>

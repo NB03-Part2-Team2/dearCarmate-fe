@@ -10,11 +10,12 @@ const getOptions = (type: 'contracts' | 'sales') => {
         },
         ticks: {
           font: {
-            size: 10,
-            weight: 400,
+            size: 12,
+            weight: 500,
+            family: 'system-ui, -apple-system, sans-serif',
           },
-          padding: 0,
-          color: '#4a4a4a',
+          padding: 8,
+          color: '#6b7280',
         },
         border: {
           display: false,
@@ -27,15 +28,16 @@ const getOptions = (type: 'contracts' | 'sales') => {
         },
         ticks: {
           font: {
-            size: 10,
-            weight: 400,
+            size: 12,
+            weight: 500,
+            family: 'system-ui, -apple-system, sans-serif',
           },
-          padding: 0,
-          color: '#888888',
+          padding: 8,
+          color: '#6b7280',
           stepSize: type === 'contracts' ? 1 : 100,
           callback: (tick, index) => {
-            const value = type === 'contracts' ? tick : tick.toLocaleString()
-            if (index === 0) return `${value}(${type === 'contracts' ? '건' : '만 원'})`
+            const value = type === 'contracts' ? tick : Number(tick).toLocaleString()
+            if (index === 0) return `${value}${type === 'contracts' ? '건' : '만원'}`
             return value
           },
         },
@@ -47,15 +49,49 @@ const getOptions = (type: 'contracts' | 'sales') => {
     },
     plugins: {
       tooltip: {
-        backgroundColor: '#212121',
-        padding: 10,
+        backgroundColor: 'rgba(17, 24, 39, 0.95)',
+        borderColor: 'rgba(59, 130, 246, 0.5)',
+        borderWidth: 1,
+        padding: 16,
+        cornerRadius: 12,
         xAlign: 'center',
         yAlign: 'bottom',
-        titleFont: { size: 10, weight: 400 },
-        bodyFont: { size: 10, weight: 400 },
-        displayColors: false,
+        titleFont: {
+          size: 14,
+          weight: 600,
+          family: 'system-ui, -apple-system, sans-serif',
+        },
+        bodyFont: {
+          size: 16,
+          weight: 500,
+          family: 'system-ui, -apple-system, sans-serif',
+        },
+        titleColor: '#f3f4f6',
+        bodyColor: '#ffffff',
+        displayColors: true,
+        usePointStyle: true,
+        boxWidth: 8,
+        boxHeight: 8,
+        titleMarginBottom: 8,
+        bodySpacing: 4,
         callbacks: {
-          label: (ctx) => `${ctx.formattedValue}${type === 'contracts' ? '건' : '만 원'}`,
+          title: (context) => {
+            return context[0].label
+          },
+          label: (ctx) => {
+            const value = type === 'contracts'
+              ? `${ctx.formattedValue}건`
+              : `${Number(ctx.parsed.y).toLocaleString()}만원`
+            return ` ${value}`
+          },
+          afterLabel: (ctx) => {
+            if (type === 'sales') {
+              const total = ctx.dataset.data.reduce((a: number, b: unknown) => a + (typeof b === 'number' ? b : 0), 0)
+              const percentage = ((ctx.parsed.y / total) * 100).toFixed(1)
+              return `전체의 ${percentage}%`
+            }
+            return undefined
+          },
         },
       },
     },

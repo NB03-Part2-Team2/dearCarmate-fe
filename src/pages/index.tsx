@@ -6,7 +6,6 @@ import PageLayout from '@ui/shared/layout/PageLayout/PageLayout'
 import { SearchByContract } from '@shared/types'
 import SearchBar from '@ui/shared/search-bar/SearchBar'
 import { SEARCH_BY_CONTRACT_FILTERS } from '@ui/shared/dropdown/constants'
-import ContractRegisterButton from '@ui/contract/feature-contracts/ContractRegisterButton'
 import ContractsBoard from '@ui/contract/feature-contracts-board/ContractsBoard'
 import Head from 'next/head'
 import getPageTitle from '@ui/shared/util-util/getPageTitle'
@@ -32,7 +31,6 @@ const ContractsBoardPage = ({ searchBy, keyword }: InferGetServerSidePropsType<t
             initialKeyword={keyword}
             searchByFilters={SEARCH_BY_CONTRACT_FILTERS}
           />
-          <ContractRegisterButton />
         </div>
         <ContractsBoard searchBy={searchBy} keyword={keyword} />
       </PageLayout>

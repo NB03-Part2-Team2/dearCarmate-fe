@@ -5,7 +5,7 @@ const cx = classNames.bind(styles)
 
 type ButtonProps = {
   children: React.ReactNode
-  size: 'small' | 'large'
+  size: 'small' | 'medium' | 'large'
   theme: 'red' | 'gray' | 'outline'
 } & React.ComponentPropsWithoutRef<'button'>
 

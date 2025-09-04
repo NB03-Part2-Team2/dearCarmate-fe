@@ -5,37 +5,43 @@
 }
 
 .wrapper {
-  @include flexbox(8px, row, space-between, center);
+  @include flexbox($space-2, row, space-between, center);
   height: 48px;
-  padding-inline: 20px;
-  transition: box-shadow 0.4s ease;
-  border-radius: 4px;
+  padding-inline: $space-5;
+  transition: $transition-colors;
+  border-radius: $radius-md;
   background-color: $white;
-  box-shadow: 0 0 0 1px inset $gray-brt3;
+  box-shadow: 0 0 0 1px inset $neutral-300, $shadow-xs;
 
   &:has(.input:focus) {
-    box-shadow: 0 0 0 1px inset $black;
+    box-shadow: 0 0 0 2px inset $primary-600, $shadow-sm;
   }
 
   &:has(.input.error) {
-    box-shadow: 0 0 0 1px inset $red;
+    box-shadow: 0 0 0 2px inset $danger-500, $shadow-sm;
   }
 
   &:has(.input.dropdownInput) {
-    box-shadow: 0 0 0 1px inset $gray-brt4;
+    box-shadow: 0 0 0 1px inset $neutral-200, $shadow-xs;
+  }
+
+  &:hover:not(:has(.input:focus)) {
+    box-shadow: 0 0 0 1px inset $neutral-400, $shadow-sm;
   }
 
   .input {
     @include glyph14Regular(16px);
     flex: 1;
     min-width: 0;
+    color: $neutral-900;
 
     &::placeholder {
-      color: $gray-brt3;
+      color: $neutral-400;
     }
 
     &:disabled {
-      color: $gray-brt2;
+      color: $neutral-500;
+      background-color: $neutral-50;
     }
   }
 }

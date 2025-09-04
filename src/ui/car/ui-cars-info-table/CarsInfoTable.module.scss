@@ -1,0 +1,50 @@
+.carNumber {
+  font-weight: 600;
+  font-family: 'Pretendard', monospace;
+  color: $neutral-900;
+}
+
+.manufacturer {
+  font-weight: 500;
+  color: $neutral-800;
+}
+
+.model {
+  font-weight: 600;
+  color: $primary-700;
+}
+
+.price {
+  font-weight: 600;
+  color: $success-700;
+  text-align: right;
+}
+
+.mileage {
+  font-family: 'Pretendard', monospace;
+  text-align: right;
+  color: $neutral-700;
+}
+
+.year {
+  color: $neutral-600;
+  text-align: center;
+}
+
+.accidentCount {
+  font-weight: 500;
+  text-align: center;
+  
+  &.high {
+    color: $danger-700;
+    font-weight: 600;
+  }
+  
+  &.medium {
+    color: $warning-700;
+  }
+  
+  &.low {
+    color: $success-700;
+  }
+}

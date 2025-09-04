@@ -6,7 +6,6 @@ const useCustomersForContract = () => {
     queryKey: ['customersForContract'],
     queryFn: async () => await getCustomersForContract(),
     staleTime: 60 * 1000 * 3, // 3 minutes
-    throwOnError: true,
   })
 
   return query

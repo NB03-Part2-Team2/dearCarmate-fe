@@ -32,6 +32,19 @@ const ContractForm = ({ onSubmit, onCancel, defaultValues }: ContractFormProps) 
   const { data: customersForContractData = [] } = useCustomersForContract()
   const { data: usersForContractData = [] } = useUsersForContract()
 
+  // 드롭다운 필터 데이터 생성 - 데이터가 없을 때는 빈 배열 반환
+  const carFilters = carsForContractData?.length > 0
+    ? carsForContractData.map(({ id, data }) => ({ text: data || '이름 없음', data: id }))
+    : []
+
+  const customerFilters = customersForContractData?.length > 0
+    ? customersForContractData.map(({ id, data }) => ({ text: data || '이름 없음', data: id }))
+    : []
+
+  const userFilters = usersForContractData?.length > 0
+    ? usersForContractData.map(({ id, data }) => ({ text: data || '이름 없음', data: id }))
+    : []
+
   return (
     <FormProvider {...methods}>
       <form className={cx('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -40,20 +53,18 @@ const ContractForm = ({ onSubmit, onCancel, defaultValues }: ContractFormProps) 
             <FieldLabel label='차량 선택' required />
             <DropdownConncet
               name='carId'
-              filters={carsForContractData.map(({ id, data }) => ({ text: data, data: id }))}
+              filters={carFilters}
               label='차량 선택'
               rules={{
                 required: '필수 입력사항입니다.',
               }}
-              hasSearch
-              searchInputPlaceholder='차량을 검색해주세요'
             />
           </div>
           <div>
             <FieldLabel label='고객 선택' required />
             <DropdownConncet
               name='customerId'
-              filters={customersForContractData.map(({ id, data }) => ({ text: data, data: id }))}
+              filters={customerFilters}
               label='고객 선택'
               rules={{
                 required: '필수 입력사항입니다.',
@@ -67,7 +78,7 @@ const ContractForm = ({ onSubmit, onCancel, defaultValues }: ContractFormProps) 
               <FieldLabel label='담당자 변경' required />
               <DropdownConncet
                 name='userId'
-                filters={usersForContractData.map(({ id, data }) => ({ text: data, data: id }))}
+                filters={userFilters}
                 label='담당자 선택'
                 rules={{
                   required: '필수 입력사항입니다.',

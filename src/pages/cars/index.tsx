@@ -35,7 +35,9 @@ const CarsInfoPage = ({ searchBy, keyword, page, status }: InferGetServerSidePro
       <PageLayout title='차량 정보'>
         <div className={cx('header')}>
           <div className={cx('left')}>
-            <CarFilterDropdown initialStatus={status} />
+            <div className={cx('filterSection')}>
+              <CarFilterDropdown initialStatus={status} />
+            </div>
             <SearchBar
               initialSearchBy={searchBy}
               initialKeyword={keyword}
@@ -47,9 +49,11 @@ const CarsInfoPage = ({ searchBy, keyword, page, status }: InferGetServerSidePro
             <CarRegisterButton />
             <Button
               onClick={() => router.push('/bulk-upload')}
-              size='small'
-              theme='red'
-            >대용량 등록
+              size='medium'
+              theme='gray'
+              className={cx('actionButton')}
+            >
+              대용량 등록
             </Button>
           </div>
         </div>

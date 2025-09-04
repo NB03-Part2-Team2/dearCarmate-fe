@@ -7,17 +7,25 @@
   left: 0;
   height: $gnb-height;
   margin: 0 auto;
-  padding-inline: 32px;
+  padding-inline: $space-8;
   background-color: $white;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 5%);
+  box-shadow: $shadow-sm;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $neutral-200;
 
   .profile {
     @include flexbox(12px, row, flex-start, center);
 
     .image {
-      border: 1px solid $gray-brt3;
+      border: 1px solid $neutral-300;
       border-radius: 50%;
       object-fit: cover;
+      transition: $transition-all;
+    }
+
+    &:hover .image {
+      border-color: $primary-600;
+      box-shadow: $shadow-sm;
     }
 
     .text {
@@ -25,12 +33,12 @@
 
       .name {
         @include glyph18Medium;
-        color: $gray-brt1;
+        color: $neutral-800;
       }
 
       .company {
         @include glyph14Medium;
-        color: $gray-brt3;
+        color: $neutral-500;
       }
     }
   }

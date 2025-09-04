@@ -32,19 +32,23 @@ const CustomersInfoPage = ({ searchBy, keyword, page }: InferGetServerSidePropsT
       </Head>
       <PageLayout title='고객 정보'>
         <div className={cx('header')}>
-          <SearchBar
-            initialSearchBy={searchBy}
-            initialKeyword={keyword}
-            searchByFilters={SEARCH_BY_CUSTOMER_FILTERS}
-            otherParams={[{ name: 'page', value: 1 }]}
-          />
+          <div className={cx('searchSection')}>
+            <SearchBar
+              initialSearchBy={searchBy}
+              initialKeyword={keyword}
+              searchByFilters={SEARCH_BY_CUSTOMER_FILTERS}
+              otherParams={[{ name: 'page', value: 1 }]}
+            />
+          </div>
           <div className={cx('buttonContainer')}>
             <CustomerRegisterButton />
             <Button
               onClick={() => router.push('/bulk-upload')}
-              size='small'
-              theme='red'
-            >대용량 등록
+              size='medium'
+              theme='gray'
+              className={cx('actionButton')}
+            >
+              대용량 등록
             </Button>
           </div>
         </div>

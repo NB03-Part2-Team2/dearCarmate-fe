@@ -1,9 +1,69 @@
 .header {
-  @include flexbox(normal, row, space-between, center);
-  width: 1600px;
-  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto $space-8;
+  padding: $space-6;
+  background: linear-gradient(135deg, $white, $neutral-50);
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-lg;
+  border: 1px solid $neutral-200;
+
+  .searchSection {
+    flex: 1;
+    margin-right: $space-6;
+  }
 
   .buttonContainer {
-    @include flexbox(12px, row, flex-start, center);
+    display: flex;
+    gap: $space-4;
+    align-items: center;
+    
+    .actionButton {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, $neutral-600, $neutral-700);
+      color: white;
+      font-weight: 600;
+      padding: $space-3 $space-6;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-sm;
+      transition: $transition-all;
+      border: none;
+      cursor: pointer;
+      min-width: 120px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background: linear-gradient(135deg, $neutral-700, $neutral-800);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $space-4;
+    
+    .searchSection {
+      width: 100%;
+      margin-right: 0;
+    }
+    
+    .buttonContainer {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }

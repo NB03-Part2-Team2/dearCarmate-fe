@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, useEffect } from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import TextField from '../TextField/TextField'
 import { ko } from 'date-fns/locale'
@@ -27,11 +27,33 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(({
   restrictToFuture = false,
   ...restProps
 }, ref) => {
-  const [date, setDate] = useState<Date | undefined>(value ? new Date(value) : undefined)
+  const [date, setDate] = useState<Date | null>(null)
 
-  const handleChange = (date: Date) => {
-    setDate(date)
-    onChange(format(date, 'yyyy-MM-dd\'T\'HH:mm:ss'))
+  useEffect(() => {
+    if (value) {
+      try {
+        const newDate = new Date(value)
+        // 유효한 날짜인지 확인
+        if (!isNaN(newDate.getTime())) {
+          setDate(newDate)
+        } else {
+          setDate(null)
+        }
+      } catch {
+        setDate(null)
+      }
+    } else {
+      setDate(null)
+    }
+  }, [value])
+
+  const handleChange = (selectedDate: Date | null) => {
+    setDate(selectedDate)
+    if (selectedDate) {
+      onChange(format(selectedDate, 'yyyy-MM-dd\'T\'HH:mm:ss'))
+    } else {
+      onChange('')
+    }
   }
 
   const currentDate = new Date()
@@ -52,6 +74,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(({
         dateFormat='yyyy/MM/dd HH:mm'
         locale={ko}
         disabled={disabled}
+        popperClassName={cx('popper')}
+        portalId="__next"
         customInput={(
           <TextField
             ref={ref}

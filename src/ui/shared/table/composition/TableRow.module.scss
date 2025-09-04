@@ -1,4 +1,19 @@
 .row {
+  transition: $transition-all;
+  border-bottom: 1px solid $neutral-200;
+
+  &:nth-child(even) {
+    background-color: $neutral-25;
+  }
+
+  &:hover {
+    background-color: $primary-25;
+    
+    &:nth-child(even) {
+      background-color: $primary-25;
+    }
+  }
+
   &.rowClick {
     cursor: pointer;
   }

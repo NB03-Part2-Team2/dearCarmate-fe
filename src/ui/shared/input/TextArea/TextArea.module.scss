@@ -3,26 +3,40 @@
   width: 100%;
 
   .wrapper {
-    padding: 16px 20px;
-    transition: box-shadow 0.4s ease;
-    border-radius: 4px;
+    padding: $space-4 $space-5;
+    transition: $transition-all;
+    border-radius: $radius-md;
     background-color: $white;
-    box-shadow: 0 0 0 1px inset $gray-brt3;
+    box-shadow: 0 0 0 1px inset $neutral-400;
+
+    &:hover {
+      box-shadow: 0 0 0 1px inset $neutral-500;
+      background-color: $neutral-50;
+    }
 
     &:has(.textarea:focus) {
-      box-shadow: 0 0 0 1px inset $black;
+      box-shadow: 0 0 0 2px $primary-100, 0 0 0 4px $primary-600;
+      background-color: $white;
     }
 
     &:has(.textarea.error) {
-      box-shadow: 0 0 0 1px inset $red;
+      box-shadow: 0 0 0 2px $danger-50, 0 0 0 4px $danger-600;
+      background-color: $danger-50;
     }
 
     .textarea {
-      @include glyph14Regular(20px);
+      @include glyph14Regular($space-5);
       width: 100%;
+      color: $neutral-900;
+      resize: vertical;
+      min-height: 80px;
 
       &::placeholder {
-        color: $gray-brt3;
+        color: $neutral-400;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }

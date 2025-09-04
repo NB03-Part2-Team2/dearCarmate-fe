@@ -1,9 +1,12 @@
 .container {
-  @include flexbox(50px, column, flex-start, center);
+  @include flexbox($space-12, column, flex-start, center);
+  padding: $space-6;
 }
 
 .text {
   @include glyph16Regular;
-  margin-top: 60px;
+  margin-top: $space-16;
   text-align: center;
+  color: $neutral-700;
+  line-height: $leading-relaxed;
 }

@@ -24,10 +24,13 @@ const ContractDocumentList = ({ keyword, page, searchBy }: ContractDocumentListP
 
   const { currentPage, data, totalPages } = contractDocumentsData
 
+  // 계약서가 있는 항목만 필터링 (documentCount > 0 또는 documents 배열이 비어있지 않음)
+  const filteredData = data.filter(item => item.documentCount > 0 || (item.documents && item.documents.length > 0))
+
   return (
     <div>
-      <ContractDocumentListTable data={data} />
-      {data.length > 0 && (
+      <ContractDocumentListTable data={filteredData} />
+      {filteredData.length > 0 && (
         <div className={cx('paginationWrapper')}>
           <Pagination currentPage={currentPage} totalPages={totalPages} />
         </div>

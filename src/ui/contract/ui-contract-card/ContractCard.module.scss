@@ -2,53 +2,63 @@
   // 참고: 케밥의 위치 설정을 위한 relative 설정
   position: relative;
   width: 388px;
-  padding: 16px 20px 20px;
-  border-radius: 4px;
+  padding: $space-4 $space-5 $space-5;
+  border-radius: $radius-lg;
   background-color: $white;
-  box-shadow: 0 0 0 1px inset $gray-brt4;
+  box-shadow: $shadow-sm;
+  border: 1px solid $neutral-200;
   cursor: grab;
+  transition: $transition-all;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+    border-color: $neutral-300;
+  }
 
   &.isDragging,
   &.isLoading {
     opacity: 0.5;
+    transform: none;
+    box-shadow: $shadow-lg;
   }
 }
 
 .header {
   @include flexbox(normal, row, space-between, center);
-  margin-bottom: 24px;
+  margin-bottom: $space-6;
 
   .info {
-    @include flexbox(8px, row, flex-start, center);
+    @include flexbox($space-2, row, flex-start, center);
 
     .customer {
       @include glyph16Bold;
-      color: $black;
+      color: $neutral-900;
     }
 
     .model {
       @include glyph14Regular;
-      color: $gray-brt3;
+      color: $neutral-400;
     }
   }
 }
 
 .body {
-  @include flexbox(8px, column, flex-start, stretch);
-  margin-bottom: 16px;
+  @include flexbox($space-2, column, flex-start, stretch);
+  margin-bottom: $space-4;
 
   .field {
-    @include flexbox(8px, row, flex-start, center);
+    @include flexbox($space-2, row, flex-start, center);
 
     .text {
       @include glyph14Medium;
       @include ellipsis;
-      color: $gray-brt1;
+      color: $neutral-700;
     }
   }
 }
 
 .date {
   @include glyph14Regular;
-  color: $gray-brt1;
+  color: $neutral-700;
 }

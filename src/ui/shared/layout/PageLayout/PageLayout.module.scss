@@ -1,9 +1,34 @@
 .container {
-  width: 1600px;
-  margin-bottom: 100px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto $space-16;
+  padding: 0 $space-6;
 
   .title {
-    @include glyph28Bold;
-    margin-bottom: 60px;
+    font-size: $font-size-3xl;
+    font-weight: 800;
+    color: $neutral-900;
+    margin-bottom: $space-12;
+    line-height: $leading-tight;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 $space-4;
+    margin-bottom: $space-12;
+    
+    .title {
+      font-size: $font-size-2xl;
+      margin-bottom: $space-8;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 $space-3;
+    
+    .title {
+      font-size: $font-size-xl;
+      margin-bottom: $space-6;
+    }
   }
 }

@@ -16,12 +16,12 @@ type PopoverMenusProps = {
   searchInputPlaceholder?: string
 }
 
-const PopoverMenus = forwardRef<HTMLDialogElement, PopoverMenusProps>(({ items, hasSearch = false, searchInputPlaceholder }, ref) => {
+const PopoverMenus = forwardRef<HTMLDivElement, PopoverMenusProps>(({ items, hasSearch = false, searchInputPlaceholder }, ref) => {
   const [searchKeyword, setSearchKeyword] = useState('')
   const searchItems = hasSearch ? items.filter(({ text }) => text?.toString().includes(searchKeyword)) : items
 
   return (
-    <dialog className={cx('popup', { hasSearch })} ref={ref}>
+    <div className={cx('popup', { hasSearch })} ref={ref}>
       {hasSearch && (
         <div className={cx('searchInputWrapper')}>
           <TextField
@@ -45,7 +45,7 @@ const PopoverMenus = forwardRef<HTMLDialogElement, PopoverMenusProps>(({ items, 
           <div className={cx('emptySearch')}>검색 결과가 없습니다.</div>
         )}
       </div>
-    </dialog>
+    </div>
   )
 })
 

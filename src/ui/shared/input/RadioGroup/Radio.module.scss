@@ -1,7 +1,13 @@
 .container {
-  @include flexbox(8px, row, flex-start, center);
+  @include flexbox($space-2, row, flex-start, center);
   width: fit-content;
   cursor: pointer;
+  transition: $transition-all;
+
+  &:hover:not(.selected) .outerCircle {
+    border-color: $neutral-500;
+    background-color: $neutral-50;
+  }
 
   .outerCircle {
     display: inline-flex;
@@ -9,30 +15,36 @@
     justify-content: center;
     width: 20px;
     height: 20px;
-    margin: 3px;
-    transition: box-shadow 0.3s;
+    margin: $space-1;
+    transition: $transition-all;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px inset $gray-brt3;
+    border: 2px solid $neutral-400;
+    background-color: $white;
 
     .innerCircle {
-      width: 10px;
-      height: 10px;
-      transition: background-color 0.3s;
+      width: 8px;
+      height: 8px;
+      transition: $transition-all;
       border-radius: 50%;
+      transform: scale(0);
     }
   }
 
   &.selected {
     .outerCircle {
-      box-shadow: 0 0 0 1px inset $red;
+      border-color: $primary-600;
+      background-color: $white;
     }
 
     .innerCircle {
-      background-color: $red;
+      background-color: $primary-600;
+      transform: scale(1);
     }
   }
 
   .label {
     @include glyph14Regular;
+    color: $neutral-700;
+    cursor: pointer;
   }
 }

@@ -1,7 +1,8 @@
 .container {
-  padding-inline: 40px;
+  padding-inline: $space-10;
   overflow: auto;
-  border-radius: 4px;
+  border-radius: $radius-lg;
   background-color: $white;
-  box-shadow: 0 0 0 1px inset $gray-brt3;
+  border: 1px solid $neutral-200;
+  box-shadow: $shadow-sm;
 }

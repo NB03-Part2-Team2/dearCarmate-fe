@@ -29,8 +29,11 @@ const ContractDocumentRegisterConnect = ({ }: ContractDocumentRegisterConnectPro
     try {
       setIsLoading(true)
       const id = await uploadFile(file)
-      setValue('contractDocuments', [...contractDocuments, { id, fileName: file.name }])
-      setPreviewFiles([...previewFiles, { id, fileName: file.name }])
+      console.log('받은 id:', id)
+      const newDocument = { id, fileName: file.name }
+      console.log('새 문서 객체:', newDocument)
+      setValue('contractDocuments', [...contractDocuments, newDocument])
+      setPreviewFiles([...previewFiles, newDocument])
     } catch (error) {
       const text = (error as AxiosError<AxiosErrorData>)?.response?.data?.message || '파일 업로드에 실패했습니다. 다시 시도해주세요.'
       alert(text)
@@ -53,32 +56,37 @@ const ContractDocumentRegisterConnect = ({ }: ContractDocumentRegisterConnectPro
         }}
         render={({ fieldState: { error } }) => (
           <div className={cx('container')}>
-            <div className={cx('previewFilesContainer')}>
-              {previewFiles.map(({ id, fileName }) => (
-                <div key={id} className={cx('item')}>
-                  <button onClick={() => handleRemoveFile(id)}>
-                    <Icon name='checkbox-minus' width={24} height={24} />
-                  </button>
-                  <div>{fileName}</div>
-                </div>
-              ))}
+            {previewFiles.length > 0 && (
+              <div className={cx('previewFilesContainer')}>
+                {previewFiles.map(({ id, fileName }) => (
+                  <div key={id} className={cx('item')}>
+                    <button type="button" onClick={() => handleRemoveFile(id)}>
+                      <Icon name='checkbox-minus' width={20} height={20} />
+                    </button>
+                    <div>{fileName}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className={cx('addButtonWrapper')}>
+              <label>
+                <input
+                  ref={inputRef}
+                  type='file'
+                  accept="*"
+                  hidden
+                  onChange={handleUploadFile}
+                />
+                <Button
+                  size='large'
+                  theme='outline'
+                  type='button'
+                  onClick={() => inputRef.current?.click()}
+                  className={cx('addButton')}
+                >+ 파일 추가
+                </Button>
+              </label>
             </div>
-            <label>
-              <input
-                ref={inputRef}
-                type='file'
-                accept="*"
-                hidden
-                onChange={handleUploadFile}
-              />
-              <Button
-                size='large'
-                theme='outline'
-                type='button'
-                onClick={() => inputRef.current?.click()}
-              >+ 파일 추가
-              </Button>
-            </label>
             {error?.message && (<Hint message={error.message} />)}
           </div>
         )}

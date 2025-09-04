@@ -18,7 +18,6 @@ const useCarsForContract = (carId?: number) => {
         ...possessionCarItems,
       ] : possessionCarItems
     },
-    throwOnError: true,
   })
 
   return query

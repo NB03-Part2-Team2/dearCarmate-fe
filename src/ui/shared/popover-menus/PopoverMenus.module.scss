@@ -1,35 +1,44 @@
 .popup {
-  z-index: 100;
+  z-index: 9999;
   width: 100%;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: $radius-md;
   background-color: $white;
-  box-shadow: 0 0 0 1px inset $gray-brt4;
+  border: 1px solid $neutral-200;
+  box-shadow: $shadow-lg;
+  display: none;
 
   .selectMenu {
-    @include flexbox(2px, column, flex-start, stretch);
+    @include flexbox($space-1, column, flex-start, stretch);
     max-height: 184px;
-    padding: 4px;
+    padding: $space-2;
     overflow-y: overlay;
 
     .item {
-      transition:
-        background-color 0.3s,
-        color 0.3s;
-      border-radius: 4px;
+      transition: $transition-all;
+      border-radius: $radius-sm;
+      cursor: pointer;
 
       .text {
         @include glyph14Regular;
-        margin: 8px 16px;
-        color: $gray-brt2;
+        margin: $space-2 $space-4;
+        color: $neutral-700;
         text-align: center;
       }
 
       &:hover {
-        background-color: $gray-brt5;
+        background-color: $neutral-100;
 
         .text {
-          color: $gray-brt1;
+          color: $neutral-900;
+        }
+      }
+
+      &:active {
+        background-color: $primary-50;
+
+        .text {
+          color: $primary-700;
         }
       }
     }
@@ -37,7 +46,8 @@
 
   &.hasSearch {
     .searchInputWrapper {
-      padding: 8px 16px;
+      padding: $space-2 $space-4;
+      border-bottom: 1px solid $neutral-200;
     }
 
     .selectMenu {
@@ -46,8 +56,16 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background-color: $gray-brt4;
+        border-radius: $radius-sm;
+        background-color: $neutral-300;
+
+        &:hover {
+          background-color: $neutral-400;
+        }
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $neutral-100;
       }
 
       .text {
@@ -56,8 +74,8 @@
 
       .emptySearch {
         @include glyph14Medium;
-        margin: 46px auto 100px;
-        color: $gray-brt4;
+        margin: $space-12 auto $space-16;
+        color: $neutral-400;
         text-align: center;
       }
     }

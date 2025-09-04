@@ -5,6 +5,11 @@ import EmptyData from '@ui/shared/table/EmptyData'
 import { CAR_STATUS_MAP } from '@ui/shared/util-constants/constants'
 import CarOptionButtons from '../feature-cars/CarOptionButtons'
 import useCarDetailModal from '../util-car-detail-modal/useCarDetailModal'
+import Badge from '@ui/shared/badge/Badge'
+import classNames from 'classnames/bind'
+import styles from './CarsInfoTable.module.scss'
+
+const cx = classNames.bind(styles)
 
 type CarsInfoTableProps = {
   data: CarType[]
@@ -25,6 +30,19 @@ const columns: Column<CarType>[] = [
 const CarsInfoTable = ({ data }: CarsInfoTableProps) => {
   const { openCarDetailModal } = useCarDetailModal()
   const isEmpty = data.length === 0
+
+  const getStatusBadgeVariant = (status: string) => {
+    if (status === '판매가능') return 'success'
+    if (status === '수리중') return 'warning'
+    if (status === '판매완료') return 'secondary'
+    return 'info'
+  }
+
+  const getAccidentCountClass = (count: number) => {
+    if (count >= 3) return 'high'
+    if (count >= 1) return 'medium'
+    return 'low'
+  }
 
   return (
     <TableContainer>
@@ -50,9 +68,35 @@ const CarsInfoTable = ({ data }: CarsInfoTableProps) => {
                 key={record.id}
                 onClick={() => { openCarDetailModal({ data: record }) }}
               >
-                {columns.map((column) => (
-                  <TableCell key={column.key}>{processedRecord[column.key]}</TableCell>
-                ))}
+                <TableCell>
+                  <span className={cx('carNumber')}>{processedRecord.carNumber}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('manufacturer')}>{processedRecord.manufacturer}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('model')}>{processedRecord.model}</span>
+                </TableCell>
+                <TableCell>{processedRecord.type}</TableCell>
+                <TableCell>
+                  <span className={cx('mileage')}>{processedRecord.mileage}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('year')}>{processedRecord.manufacturingYear}</span>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('price')}>{processedRecord.price}</span>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={getStatusBadgeVariant(processedRecord.status)}>
+                    {processedRecord.status}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <span className={cx('accidentCount', getAccidentCountClass(processedRecord.accidentCount))}>
+                    {processedRecord.accidentCount}
+                  </span>
+                </TableCell>
                 <TableCell isLast>
                   <CarOptionButtons car={record} />
                 </TableCell>

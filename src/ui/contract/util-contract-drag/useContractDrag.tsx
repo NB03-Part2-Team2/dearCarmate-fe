@@ -36,9 +36,14 @@ const useContractDrag = (data: ContractType, status: ContractStatus) => {
             form: <ContractResolutionDateForm
               onCancel={closeFormModal}
               onSubmit={async (data) => {
-                closeFormModal()
-                const { resolutionDate } = data
-                await editContractStatusAsync({ id: item.id, data: { status: newStatus, resolutionDate }, prevStatus })
+                try {
+                  closeFormModal()
+                  const { resolutionDate } = data
+                  await editContractStatusAsync({ id: item.id, data: { status: newStatus, resolutionDate }, prevStatus })
+                } catch (error) {
+                  // 에러는 useEditContractStatus의 onError에서 처리됨
+                  console.error('Contract status update failed:', error)
+                }
               }}
               type={newStatus}
             // eslint-disable-next-line react/jsx-closing-bracket-location
@@ -51,6 +56,9 @@ const useContractDrag = (data: ContractType, status: ContractStatus) => {
         } else if (contractOutcomeGroup.includes(prevStatus) && contractOutcomeGroup.includes(newStatus)) {
           return
         }
+      } catch (error) {
+        // 에러는 useEditContractStatus의 onError에서 처리됨
+        console.error('Contract drag operation failed:', error)
       } finally {
         setIsLoading(false)
       }

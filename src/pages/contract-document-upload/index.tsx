@@ -29,13 +29,17 @@ const ContractDocumentUploadPage = ({ searchBy, keyword, page }: InferGetServerS
       </Head>
       <PageLayout title='계약서 업로드'>
         <div className={cx('header')}>
-          <SearchBar
-            initialSearchBy={searchBy}
-            initialKeyword={keyword}
-            searchByFilters={SEARCH_BY_CONTRACT_DOCUMENTS_FILTERS}
-            otherParams={[{ name: 'page', value: 1 }]}
-          />
-          <ContractDocumentRegisterButton />
+          <div className={cx('searchSection')}>
+            <SearchBar
+              initialSearchBy={searchBy}
+              initialKeyword={keyword}
+              searchByFilters={SEARCH_BY_CONTRACT_DOCUMENTS_FILTERS}
+              otherParams={[{ name: 'page', value: 1 }]}
+            />
+          </div>
+          <div className={cx('buttonContainer')}>
+            <ContractDocumentRegisterButton />
+          </div>
         </div>
         <ContractDocumentList searchBy={searchBy} keyword={keyword} page={page} />
       </PageLayout>

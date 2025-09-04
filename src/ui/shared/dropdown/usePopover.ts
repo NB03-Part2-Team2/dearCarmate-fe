@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const usePopover = (triggerRef?: React.RefObject<HTMLButtonElement>) => {
-  const popoverRef = useRef<HTMLDialogElement>(null)
+  const popoverRef = useRef<HTMLDivElement>(null)
   const [isOpened, setIsOpened] = useState(false)
 
   const openPopover = () => {
@@ -32,11 +32,11 @@ const usePopover = (triggerRef?: React.RefObject<HTMLButtonElement>) => {
   useEffect(() => {
     if (!popoverRef.current) return
     if (isOpened) {
-      popoverRef.current.show()
+      popoverRef.current.style.display = 'block'
       document.addEventListener('mousedown', handleClickOutside)
     }
     else {
-      popoverRef.current.close()
+      popoverRef.current.style.display = 'none'
       document.removeEventListener('mousedown', handleClickOutside)
     }
 

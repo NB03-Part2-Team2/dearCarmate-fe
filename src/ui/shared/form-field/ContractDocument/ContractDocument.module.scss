@@ -1,11 +1,47 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  width: 100%;
+  
   .previewFilesContainer {
     @include flexbox(12px, column);
-    margin-bottom: 12px;
+    width: 100%;
 
     .item {
       @include flexbox(8px, row, flex-start, center);
       @include glyph14Regular;
+      padding: $space-2 $space-3;
+      background: $neutral-50;
+      border-radius: $radius-md;
+      border: 1px solid $neutral-200;
+      
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $danger-600;
+        
+        &:hover {
+          color: $danger-700;
+        }
+      }
+    }
+  }
+  
+  .addButtonWrapper {
+    width: 100%;
+    
+    label {
+      display: block;
+      width: 100%;
+      
+      .addButton {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

@@ -5,3 +5,215 @@
     width: 100%;
   }
 }
+
+.popper {
+  z-index: 1002 !important;
+
+  // 모던한 드롭다운 스타일
+  :global .react-datepicker {
+    font-family: inherit;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: white;
+    padding: 16px;
+    animation: fadeInScale 0.15s ease-out;
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    // 헤더 스타일
+    .react-datepicker__header {
+      background: none;
+      border: none;
+      padding: 0 0 16px 0;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+
+      .react-datepicker__current-month {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 12px;
+      }
+
+      .react-datepicker__day-names {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 4px;
+      }
+
+      .react-datepicker__day-name {
+        width: 36px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #6b7280;
+        margin: 0;
+      }
+    }
+
+    // 네비게이션 버튼
+    .react-datepicker__navigation {
+      top: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      border: none;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #e5e7eb;
+      }
+
+      &--previous {
+        left: 16px;
+      }
+
+      &--next {
+        right: 16px;
+      }
+
+      .react-datepicker__navigation-icon {
+        &::before {
+          border-color: #6b7280;
+          border-width: 2px 2px 0 0;
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+
+    // 날짜 스타일
+    .react-datepicker__month {
+      margin: 0;
+      padding: 0;
+    }
+
+    .react-datepicker__week {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .react-datepicker__day {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 8px;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      transition: all 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: #f3f4f6;
+      }
+
+      &--selected {
+        background: #3b82f6 !important;
+        color: white !important;
+
+        &:hover {
+          background: #2563eb !important;
+        }
+      }
+
+      &--keyboard-selected {
+        background: #dbeafe;
+        color: #3b82f6;
+      }
+
+      &--today {
+        background: #fef3c7;
+        color: #d97706;
+        font-weight: 600;
+      }
+
+      &--outside-month {
+        color: #d1d5db;
+      }
+
+      &--disabled {
+        color: #d1d5db;
+        cursor: not-allowed;
+        
+        &:hover {
+          background: none;
+        }
+      }
+    }
+
+    // 시간 선택 스타일
+    .react-datepicker__time-container {
+      border-left: 1px solid #e5e7eb;
+      margin-left: 16px;
+      padding-left: 16px;
+
+      .react-datepicker__header--time {
+        background: none;
+        border: none;
+        padding: 0 0 8px 0;
+        margin-bottom: 8px;
+        border-bottom: 1px solid #e5e7eb;
+
+        .react-datepicker-time__header {
+          font-size: 14px;
+          font-weight: 600;
+          color: #111827;
+        }
+      }
+
+      .react-datepicker__time {
+        .react-datepicker__time-box {
+          .react-datepicker__time-list {
+            scrollbar-width: thin;
+            scrollbar-color: #d1d5db transparent;
+
+            &::-webkit-scrollbar {
+              width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+              background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: #d1d5db;
+              border-radius: 3px;
+            }
+
+            .react-datepicker__time-list-item {
+              padding: 8px 12px;
+              font-size: 14px;
+              border-radius: 6px;
+              margin: 2px 4px;
+              transition: all 0.2s ease;
+
+              &:hover {
+                background: #f3f4f6;
+              }
+
+              &--selected {
+                background: #3b82f6 !important;
+                color: white !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
